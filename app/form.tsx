@@ -38,7 +38,7 @@ const Form = () => {
 
             })
             const data = await res.json()
-            if (data.success) toast.success(data.message || 'Login successful')
+            if (data.success) toast.success(data.message || 'Login successful deploy')
             setLoading(false)
         } catch (err: any) {
             setLoading(false)
