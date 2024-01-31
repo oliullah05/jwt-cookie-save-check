@@ -16,33 +16,29 @@ const Form = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         try {
-            const response = await exportApi.post("/login", { email, password });
+            // const response = await exportApi.post("/login", { email, password });
     
-            // Assuming res.data has a 'success' property
-            if (response.data.success) {
-              const message = response.data.message || "Login successful";
-              // You can replace 'toast.success' with your desired success notification method
-              toast.success(message);
-              console.log(response.data);
-            }
+            // // Assuming res.data has a 'success' property
+            // if (response.data.success) {
+            //   const message = response.data.message || "Login successful";
+            //   // You can replace 'toast.success' with your desired success notification method
+            //   toast.success(message);
+            //   console.log(response.data);
+            // }
 
 
 
+            const res = await fetch(`${serverURI}/login`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
 
-
-
-
-            // const res = await fetch(`${serverURI}/login`, {
-            //     method: 'POST',
-            //     credentials: 'include',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({ email, password })
-
-            // })
-            // const data = await res.json()
-            // if (data.success) toast.success(data.message || 'Login successful')
+            })
+            const data = await res.json()
+            if (data.success) toast.success(data.message || 'Login successful')
             setLoading(false)
         } catch (err: any) {
             setLoading(false)
